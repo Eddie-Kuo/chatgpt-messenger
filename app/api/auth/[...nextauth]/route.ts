@@ -86,4 +86,12 @@ export const authOptions: AuthOptions = {
     }),
   ],
   debug: process.env.NODE_ENV === 'development',
+  session: {
+    strategy: 'jwt',
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };
+
+// next 13.2+ nextAuth syntax - changed file name to route.ts as well
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
