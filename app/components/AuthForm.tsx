@@ -6,6 +6,7 @@ import AuthSocialButton from './AuthSocialButton';
 import AuthInput from './ui/AuthInput';
 import Button from './ui/Button';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
+import axios from 'axios';
 
 type Variant = 'LOGIN' | 'REGISTER';
 
@@ -37,7 +38,7 @@ export default function AuthForm() {
     setIsLoading(true);
 
     if (variant === 'REGISTER') {
-      // Axios Register
+      axios.post('/api/register', data);
     }
 
     if (variant === 'LOGIN') {
