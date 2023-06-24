@@ -7,6 +7,7 @@ import AuthInput from './ui/AuthInput';
 import Button from './ui/Button';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 type Variant = 'LOGIN' | 'REGISTER';
 
@@ -38,7 +39,9 @@ export default function AuthForm() {
     setIsLoading(true);
 
     if (variant === 'REGISTER') {
-      axios.post('/api/register', data);
+      axios
+        .post('/api/register', data)
+        .catch(() => toast.error('Something went wrong! Try again.'));
     }
 
     if (variant === 'LOGIN') {
