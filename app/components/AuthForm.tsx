@@ -68,8 +68,17 @@ export default function AuthForm() {
 
   const socialSignIn = (action: string) => {
     setIsLoading(true);
-
     // NextAuth Social Sign in
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error('Failed to log in.');
+        }
+        if (callback?.ok && !callback?.error) {
+          toast.success('Logged in!');
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
