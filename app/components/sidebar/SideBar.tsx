@@ -1,3 +1,5 @@
+import DesktopSidebar from './DesktopSidebar';
+
 interface SideBarProps {
   children: React.ReactNode;
 }
