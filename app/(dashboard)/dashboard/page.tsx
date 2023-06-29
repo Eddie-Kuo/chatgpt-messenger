@@ -1,14 +1,11 @@
-'use client';
-
-import { signOut } from 'next-auth/react';
+import EmptyDash from '../../components/EmptyDash';
 
 interface pageProps {}
 
 export default function page({}: pageProps) {
   return (
-    <div>
-      <p>Hello! Welcome to the dashboard</p>
-      <button onClick={() => signOut()}>Logout</button>
+    <div className='hidden lg:block lg:pl-80 h-full'>
+      <EmptyDash />
     </div>
   );
 }
