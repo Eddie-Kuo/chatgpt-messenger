@@ -25,5 +25,7 @@ const useConversation = () => {
   );
 };
 
+export default useConversation;
+
 // useMemo makes applications more efficient by storing computation results in cache then retrieves
 // the same information when it's needed instead od computing again
