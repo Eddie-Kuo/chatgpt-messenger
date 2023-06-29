@@ -23,6 +23,7 @@ export default function AuthForm() {
   // page redirect for authenticated users
   useEffect(() => {
     if (session?.status === 'authenticated') {
+      toast.success('Logged in!');
       router.push('/dashboard');
     }
   }, [session?.status, router]);
@@ -54,6 +55,7 @@ export default function AuthForm() {
       // Axios Register
       axios
         .post('/api/register', data)
+        .then(() => signIn('credentials', data))
         .catch(() => toast.error('Something went wrong! Try again.'))
         .finally(() => setIsLoading(false));
     }
@@ -71,6 +73,7 @@ export default function AuthForm() {
 
           if (callback?.ok && !callback.error) {
             toast.success('Logged in!');
+            router.push('/dashboard');
           }
         })
         .finally(() => setIsLoading(false));
