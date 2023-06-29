@@ -18,7 +18,7 @@ const useRoutes = () => {
         active: pathname === '/conversations' || !!conversationId,
       },
       {
-        label: 'Dashboard',
+        label: 'Users',
         href: '/dashboard',
         icon: HiUsers,
         active: pathname === '/dashboard',
