@@ -1,4 +1,3 @@
-'use client';
 import clsx from 'clsx';
 import Link from 'next/link';
 
@@ -19,12 +18,12 @@ export default function DesktopItem({
 }: DesktopItemProps) {
   const handleClick = () => {
     if (onClick) {
-      return onClick;
+      return onClick();
     }
   };
 
   return (
-    <li onClick={handleClick}>
+    <li onClick={handleClick} key={label}>
       <Link
         href={href}
         className={clsx(

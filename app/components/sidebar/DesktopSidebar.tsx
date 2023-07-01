@@ -15,7 +15,7 @@ export default function DesktopSidebar({}: DesktopSidebarProps) {
   '
     >
       <nav className='mt-4 flex flex-col justify-between'>
-        <ul className='flex flex-col items-center space-y-1'>
+        <ul role='list' className='flex flex-col items-center space-y-1'>
           {routes.map((item) => (
             <DesktopItem
               key={item.label}
