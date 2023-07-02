@@ -29,11 +29,11 @@ const MobileFooter = () => {
     >
       {routes.map((route) => (
         <MobileItem
-          key={route.href}
-          href={route.href}
-          icon={route.icon}
-          active={route.active}
-          onClick={route.onClick}
+          key={route!.href}
+          href={route!.href}
+          icon={route?.icon}
+          active={route?.active}
+          onClick={route?.onClick}
         />
       ))}
     </div>
