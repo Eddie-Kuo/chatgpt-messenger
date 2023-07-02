@@ -1,6 +1,7 @@
 'use client';
 
 import { User } from '@prisma/client';
+import UserBlock from './UserBlock';
 
 interface UserListProps {
   items: User[];
