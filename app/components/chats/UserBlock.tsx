@@ -1,7 +1,9 @@
 'use client';
 
 import { User } from '@prisma/client';
-import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 import Avatar from '../Avatar';
 
 interface UserBlockProps {
@@ -10,10 +12,20 @@ interface UserBlockProps {
 
 export default function UserBlock({ data }: UserBlockProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setIsLoading(true);
-  };
+
+    axios
+      .post('/api/conversations', {
+        userId: data.id,
+      })
+      .then((data) => {
+        router.push(`/conversations/${data.data.id}`);
+      })
+      .finally(() => setIsLoading(false));
+  }, [data, router]);
 
   return (
     <div
