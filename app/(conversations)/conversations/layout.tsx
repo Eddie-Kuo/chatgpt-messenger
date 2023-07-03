@@ -1,3 +1,4 @@
+import ConversationsList from '../../components/conversations/ConversationsList';
 import SideBar from '../../components/sidebar/SideBar';
 
 export default function ConversationsLayout({
@@ -8,7 +9,10 @@ export default function ConversationsLayout({
   return (
     // @ts-expect-error
     <SideBar>
-      <div className='h-full'>{children}</div>
+      <div className='h-full'>
+        <ConversationsList initialItems={[]} />
+        {children}
+      </div>
     </SideBar>
   );
 }
