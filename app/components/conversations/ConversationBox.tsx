@@ -1,10 +1,14 @@
 'use client';
 
+import clsx from 'clsx';
+import { format } from 'date-fns';
+import { bg } from 'date-fns/locale';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import useOtherUser from '../../hooks/useOtherUser';
 import { FullConversationType } from '../../types';
+import Avatar from '../Avatar';
 
 interface ConversationBoxProps {
   data: FullConversationType;
@@ -64,5 +68,29 @@ export default function ConversationBox({
     return 'Started a Conversation';
   }, [lastMessage]);
 
-  return <div>Conversation Box</div>;
+  return (
+    <div
+      onClick={handleClick}
+      className={clsx(
+        'w-full relative flex items-center space-x-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer p-3',
+        selected ? 'bg-neutral-100' : 'bg-white'
+      )}
+    >
+      <Avatar user={otherUser} />
+      <div className='min-w-0 flex-1'>
+        <div className='focus:outline-none'>
+          <div className='flex justify-between items-center mb-1'>
+            <p className='text-md font-medium text-gray-900'>
+              {data.name || otherUser.name}
+            </p>
+            {true && (
+              <p className='text-xs text-gray-400 font-light'>
+                {format(new Date(), 'p')}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
