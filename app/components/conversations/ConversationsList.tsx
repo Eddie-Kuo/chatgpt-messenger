@@ -6,6 +6,7 @@ import useConversation from '../../hooks/useConversation';
 import { FullConversationType } from '../../types';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 import clsx from 'clsx';
+import ConversationBox from './ConversationBox';
 
 interface ConversationsListProps {
   initialItems: FullConversationType[];
@@ -32,6 +33,13 @@ export default function ConversationsList({
             <MdOutlineGroupAdd size={20} />
           </div>
         </div>
+        {items.map((item) => (
+          <ConversationBox
+            key={item.id}
+            data={item}
+            selected={conversationId === item.id}
+          />
+        ))}
       </div>
     </aside>
   );
