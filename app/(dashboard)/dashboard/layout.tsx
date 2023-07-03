@@ -16,7 +16,6 @@ export default async function DashboardLayout({
         <UserList items={users} />
         {children}
       </div>
-      ;
     </SideBar>
   );
 }
