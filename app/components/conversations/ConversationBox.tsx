@@ -1,7 +1,17 @@
 'use client';
 
-interface ConversationBoxProps {}
+import { FullConversationType } from '../../types';
 
-export default function ConversationBox({}: ConversationBoxProps) {
+interface ConversationBoxProps {
+  data: FullConversationType;
+  selected?: boolean;
+}
+
+export default function ConversationBox({
+  data,
+  selected,
+}: ConversationBoxProps) {
+  // hook to select the other user in the conversation
+
   return <div>Conversation Box</div>;
 }
