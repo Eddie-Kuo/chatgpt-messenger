@@ -3,6 +3,7 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { HiPhoto } from 'react-icons/hi2';
 import useConversation from '../../hooks/useConversation';
+import MessageInput from './MessageInput';
 
 interface FormProps {}
 
@@ -31,7 +32,15 @@ export default function Form({}: FormProps) {
         // handleSubmit handles the data from react-hook-forms - passing it into our custom onSubmit
         onSubmit={handleSubmit(onSubmit)}
         className='flex items-center gap-2 lg:gap-4 w-full'
-      ></form>
+      >
+        <MessageInput
+          id='message'
+          register={register}
+          errors={errors}
+          required
+          placeholder='Send a Message'
+        />
+      </form>
     </div>
   );
 }
