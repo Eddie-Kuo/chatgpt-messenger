@@ -1,7 +1,7 @@
 'use client';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { HiPhoto } from 'react-icons/hi2';
+import { HiPaperAirplane, HiPhoto } from 'react-icons/hi2';
 import useConversation from '../../hooks/useConversation';
 import MessageInput from './MessageInput';
 
@@ -40,6 +40,12 @@ export default function Form({}: FormProps) {
           required
           placeholder='Send a Message'
         />
+        <button
+          type='submit'
+          className='rounded-full p-2 bg-sky-500 cursor-pointer hover:bg-sky-600 transition'
+        >
+          <HiPaperAirplane className='text-white' size={15} />
+        </button>
       </form>
     </div>
   );
