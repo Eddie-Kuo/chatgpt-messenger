@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 import useOtherUser from '../../hooks/useOtherUser';
 import { HiChevronLeft } from 'react-icons/hi';
+import Avatar from '../Avatar';
+import { HiEllipsisHorizontal } from 'react-icons/hi2';
 
 interface HeaderProps {
   conversation: Conversation & {
@@ -25,7 +27,7 @@ export default function Header({ conversation }: HeaderProps) {
   }, [conversation]);
 
   return (
-    <div className='bg-white w-full flex border-b-[1px] sm:px-4 py-3 px-4 lg:px-6 justify-between items-center shadow-sm '>
+    <div className='bg-white w-full flex border-b-[1px] sm:px-4 py-2 px-4 lg:px-3 justify-between items-center shadow-sm '>
       <div className='flex gap-3 items-center'>
         <Link
           href='/conversations'
@@ -33,7 +35,19 @@ export default function Header({ conversation }: HeaderProps) {
         >
           <HiChevronLeft size={26} />
         </Link>
+        <Avatar user={otherUser} />
+        <div className='flex flex-col'>
+          <div>{conversation.name || otherUser.name}</div>
+          <div className='text-sm font-light text-neutral-500'>
+            {statusText}
+          </div>
+        </div>
       </div>
+      <HiEllipsisHorizontal
+        size={28}
+        onClick={() => {}}
+        className='text-sky-500 cursor-pointer hover:text-sky-600 transition'
+      />
     </div>
   );
 }
