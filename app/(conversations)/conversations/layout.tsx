@@ -1,6 +1,6 @@
 import getConversations from '../../actions/getConversations';
-import ConversationsList from '../../components/conversations/ConversationsList';
-import SideBar from '../../components/sidebar/SideBar';
+import ConversationsList from '../../components/messagesSidebar/ConversationsList';
+import SideBar from '../../components/navSidebar/SideBar';
 
 export default async function ConversationsLayout({
   children,
