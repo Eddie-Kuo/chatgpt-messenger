@@ -1,5 +1,7 @@
 import getConversationById from '@/components/app/actions/getConversationById';
 import getMessages from '@/components/app/actions/getMessages';
+import Body from '@/components/app/components/conversations/Body';
+import Form from '@/components/app/components/conversations/Form';
 import Header from '@/components/app/components/conversations/Header';
 import EmptyDash from '@/components/app/components/EmptyDash';
 
@@ -25,6 +27,8 @@ export default async function page({ params }: { params: pageProps }) {
     <div className='lg:pl-80 h-full'>
       <div className='h-full flex flex-col'>
         <Header conversation={conversation} />
+        <Body />
+        <Form />
       </div>
     </div>
   );
