@@ -1,6 +1,6 @@
 import getUsers from '../../actions/getUsers';
-import SideBar from '../../components/sidebar/SideBar';
-import UserList from '../../components/chats/UserList';
+import SideBar from '../../components/navSidebar/SideBar';
+import UserList from '../../components/peopleSidebar/UserList';
 
 export default async function DashboardLayout({
   children,
