@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { HiPaperAirplane, HiPhoto } from 'react-icons/hi2';
 import useConversation from '../../hooks/useConversation';
@@ -21,8 +22,12 @@ export default function Form({}: FormProps) {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // axios post with ...data + conversationId
-    // clear input field - shouldValidate: true to rerender the component
+    setValue('message', '', { shouldValidate: true });
+
+    axios.post('/api/messages', {
+      ...data,
+      conversationId,
+    });
   };
 
   return (
