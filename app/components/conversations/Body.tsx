@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import useConversation from '../../hooks/useConversation';
 import { FullMessageType } from '../../types';
+import MessageBox from './MessageBox';
 
 interface BodyProps {
   initialMessages: FullMessageType[];
