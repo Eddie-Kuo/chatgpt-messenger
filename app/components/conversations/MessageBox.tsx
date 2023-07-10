@@ -57,6 +57,9 @@ export default function MessageBox({ isLast, data }: MessageBoxProps) {
             <div>{data.body}</div>
           )}
         </div>
+        {isLast && isOwnMessage && seenList.length > 0 && (
+          <div className='text-xs font-light text-gray-500'>{`Seen by ${seenList}`}</div>
+        )}
       </div>
     </div>
   );
