@@ -53,7 +53,7 @@ export default function Header({ conversation }: HeaderProps) {
         </div>
         <HiEllipsisHorizontal
           size={28}
-          onClick={() => {}}
+          onClick={() => setOpenDrawer(true)}
           className='text-sky-500 cursor-pointer hover:text-sky-600 transition'
         />
       </div>
