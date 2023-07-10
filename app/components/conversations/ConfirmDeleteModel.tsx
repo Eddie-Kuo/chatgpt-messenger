@@ -7,6 +7,8 @@ import Modal from '../Modal';
 import { FiAlertTriangle } from 'react-icons/fi';
 import { Dialog } from '@headlessui/react';
 import Button from '../ui/Button';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 interface ConfirmDeleteModelProps {
   isOpen?: boolean;
@@ -22,11 +24,19 @@ export default function ConfirmDeleteModel({
   const [isLoading, setIsLoading] = useState(false);
 
   const onDelete = useCallback(() => {
-    // loading state
-    // axios route
-    // close conversation
-    // set loading state back to false
-  }, []);
+    setIsLoading(true);
+    axios
+      .delete(`/api/conversations/${conversationId}`)
+      .then(() => {
+        onClose();
+        router.push('/conversations');
+        router.refresh();
+      })
+      .catch(() =>
+        toast.error('Something went wrong! Unable to delete conversation.')
+      )
+      .finally(() => setIsLoading(false));
+  }, [conversationId, router, onClose]);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className='sm:flex sm:items-start'>
