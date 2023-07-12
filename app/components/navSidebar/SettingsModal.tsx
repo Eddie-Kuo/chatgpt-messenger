@@ -1,11 +1,13 @@
 'use client';
 
 import { User } from '@prisma/client';
+import axios from 'axios';
 import { CldUploadButton } from 'next-cloudinary';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import Modal from '../Modal';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
@@ -40,16 +42,22 @@ export default function SettingsModal({
   const image = watch('image');
 
   const handleUpload = (result: any) => {
-    setValue('image', result?.info?.secure_url, {
+    setValue('image', result.info.secure_url, {
       shouldValidate: true,
     });
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = () => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    // axios call
-    // set is loading back to false
+    axios
+      .post('/api/settings', data)
+      .then(() => {
+        router.refresh();
+        onClose();
+      })
+      .catch(() => toast.error('Request failed'))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -80,8 +88,8 @@ export default function SettingsModal({
                 </label>
                 <div className='mt-2 flex items-center gap-x-3'>
                   <Image
-                    width='48'
-                    height='48'
+                    width='64'
+                    height='64'
                     className='rounded-full'
                     src={
                       image || currentUser?.image || '/images/placeholder.jpg'
