@@ -88,14 +88,15 @@ export default function SettingsModal({
                 </label>
                 <div className='mt-2 flex items-center gap-x-3'>
                   <Image
-                    width='64'
-                    height='64'
-                    className='rounded-full'
+                    width={60}
+                    height={60}
+                    className='rounded-full w-20 h-20'
                     src={
                       image || currentUser?.image || '/images/placeholder.jpg'
                     }
                     alt='avatar'
                   />
+
                   <CldUploadButton
                     options={{ maxFiles: 1 }}
                     onUpload={handleUpload}
