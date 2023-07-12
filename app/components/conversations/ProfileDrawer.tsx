@@ -7,7 +7,7 @@ import { Fragment, useMemo, useState } from 'react';
 import { IoClose, IoTrash } from 'react-icons/io5';
 import useOtherUser from '../../hooks/useOtherUser';
 import Avatar from '../Avatar';
-import ConfirmDeleteModel from './ConfirmDeleteModel';
+import ConfirmDeleteModal from './ConfirmDeleteModal';
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -43,7 +43,7 @@ export default function ProfileDrawer({
 
   return (
     <>
-      <ConfirmDeleteModel
+      <ConfirmDeleteModal
         isOpen={isModelOpen}
         onClose={() => setIsModelOpen(false)}
       />
