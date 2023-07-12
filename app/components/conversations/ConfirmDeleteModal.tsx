@@ -15,7 +15,7 @@ interface ConfirmDeleteModelProps {
   onClose: () => void;
 }
 
-export default function ConfirmDeleteModel({
+export default function ConfirmDeleteModal({
   isOpen,
   onClose,
 }: ConfirmDeleteModelProps) {
