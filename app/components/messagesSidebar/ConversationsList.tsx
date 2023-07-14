@@ -20,7 +20,7 @@ export default function ConversationsList({
   users,
 }: ConversationsListProps) {
   const [items, setItems] = useState(initialItems);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const router = useRouter();
   const { conversationId, isOpen } = useConversation();
 
