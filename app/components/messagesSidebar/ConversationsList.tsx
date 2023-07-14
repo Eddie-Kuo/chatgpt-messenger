@@ -8,13 +8,16 @@ import { MdOutlineGroupAdd } from 'react-icons/md';
 import clsx from 'clsx';
 import ConversationBox from './ConversationBox';
 import GroupChatModal from './GroupChatModal';
+import { User } from '@prisma/client';
 
 interface ConversationsListProps {
   initialItems: FullConversationType[];
+  users: User[];
 }
 
 export default function ConversationsList({
   initialItems,
+  users,
 }: ConversationsListProps) {
   const [items, setItems] = useState(initialItems);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +29,7 @@ export default function ConversationsList({
       <GroupChatModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        users={users}
       />
       <aside
         className={clsx(
