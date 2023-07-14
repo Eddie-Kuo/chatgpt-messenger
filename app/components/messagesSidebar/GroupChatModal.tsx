@@ -63,7 +63,20 @@ export default function GroupChatModal({
                 required
                 register={register}
               />
-              <Select />
+              <Select
+                disabled={isLoading}
+                label='Members'
+                options={users.map((user) => ({
+                  value: user.id,
+                  label: user.name,
+                }))}
+                onChange={(value) =>
+                  setValue('members', value, {
+                    shouldValidate: true,
+                  })
+                }
+                value={members}
+              />
             </div>
           </div>
         </div>
