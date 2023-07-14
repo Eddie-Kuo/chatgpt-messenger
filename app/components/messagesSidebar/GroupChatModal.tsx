@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from '../Modal';
+import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Select from '../ui/Select';
 
@@ -79,6 +80,19 @@ export default function GroupChatModal({
               />
             </div>
           </div>
+        </div>
+        <div className='mt-6 flex items-center justify-end gap-x-4'>
+          <Button
+            disabled={isLoading}
+            onClick={onClose}
+            type='button'
+            secondary
+          >
+            Cancel
+          </Button>
+          <Button disabled={isLoading} type='submit'>
+            Create
+          </Button>
         </div>
       </form>
     </Modal>

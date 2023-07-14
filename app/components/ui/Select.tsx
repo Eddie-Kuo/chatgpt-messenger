@@ -29,6 +29,7 @@ export default function Select({
           onChange={onChange}
           isMulti
           options={options}
+          // select is within a modal - issues with zIndex + overflow fixed with menuPortalTarget
           menuPortalTarget={document.body}
           styles={{
             menuPortal: (base) => ({ ...base, zIndex: 9999 }),
