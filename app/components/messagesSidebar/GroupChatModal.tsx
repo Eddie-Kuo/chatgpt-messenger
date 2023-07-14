@@ -1,9 +1,11 @@
 'use client';
 
 import { User } from '@prisma/client';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import Modal from '../Modal';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
@@ -38,10 +40,20 @@ export default function GroupChatModal({
 
   const members = watch('members');
 
-  const onSubmit: SubmitHandler<FieldValues> = () => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    // axios post
+    axios
+      .post('/api/conversations', {
+        ...data,
+        isGroup: true,
+      })
+      .then(() => {
+        router.refresh();
+        onClose();
+      })
+      .catch(() => toast.error('Creation of Group Failed.'))
+      .finally(() => setIsLoading(false));
   };
 
   return (
