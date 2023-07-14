@@ -9,6 +9,7 @@ import { useCallback, useMemo } from 'react';
 import useOtherUser from '../../hooks/useOtherUser';
 import { FullConversationType } from '../../types';
 import Avatar from '../Avatar';
+import GroupedAvatar from '../GroupedAvatar';
 
 interface ConversationBoxProps {
   data: FullConversationType;
@@ -76,7 +77,12 @@ export default function ConversationBox({
         selected ? 'bg-neutral-100' : 'bg-white'
       )}
     >
-      <Avatar user={otherUser} />
+      {data.isGroup ? (
+        <GroupedAvatar users={data.users} />
+      ) : (
+        <Avatar user={otherUser} />
+      )}
+
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>
           <div className='flex justify-between items-center'>

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import AuthSocialButton from './AuthSocialButton';
-import AuthInput from './ui/AuthInput';
+import Input from './ui/Input';
 import Button from './ui/Button';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
 import axios from 'axios';
@@ -100,7 +100,7 @@ export default function AuthForm() {
       <div className='bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
         <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
           {variant === 'REGISTER' && (
-            <AuthInput
+            <Input
               id='name'
               label='Name'
               register={register}
@@ -108,7 +108,7 @@ export default function AuthForm() {
               disabled={isLoading}
             />
           )}
-          <AuthInput
+          <Input
             id='email'
             label='Email Address'
             type='email'
@@ -116,7 +116,7 @@ export default function AuthForm() {
             errors={errors}
             disabled={isLoading}
           />
-          <AuthInput
+          <Input
             id='password'
             label='Password'
             type='password'
