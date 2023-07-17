@@ -106,6 +106,7 @@ export default function AuthForm() {
               register={register}
               errors={errors}
               disabled={isLoading}
+              required
             />
           )}
           <Input
@@ -115,6 +116,7 @@ export default function AuthForm() {
             register={register}
             errors={errors}
             disabled={isLoading}
+            required
           />
           <Input
             id='password'
@@ -123,6 +125,7 @@ export default function AuthForm() {
             register={register}
             errors={errors}
             disabled={isLoading}
+            required
           />
 
           <div>

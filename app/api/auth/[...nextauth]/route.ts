@@ -78,7 +78,7 @@ export const authOptions: NextAuthOptions = {
           credentials.password,
           user.hashedPassword
         );
-        if (isCorrectPassword) {
+        if (!isCorrectPassword) {
           throw new Error('Invalid Password');
         }
 
