@@ -48,7 +48,11 @@ export default function MessageBox({ isLast, data }: MessageBoxProps) {
           </div>
         </div>
         <div className={message}>
-          <ImageModal />
+          <ImageModal
+            src={data.image}
+            isOpen={imageModalOpen}
+            onClose={() => setImageModalOpen(false)}
+          />
           {data.image ? (
             <Image
               alt='Image'
