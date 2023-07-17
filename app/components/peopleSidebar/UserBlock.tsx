@@ -30,7 +30,8 @@ export default function UserBlock({ data }: UserBlockProps) {
 
   return (
     <>
-      <LoadingModal />
+      {isLoading && <LoadingModal />}
+
       <div
         onClick={handleClick}
         className='relative w-full flex items-center space-x-3 bg-white p-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer'
