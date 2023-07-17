@@ -7,6 +7,7 @@ import { Fragment, useMemo, useState } from 'react';
 import { IoClose, IoTrash } from 'react-icons/io5';
 import useOtherUser from '../../hooks/useOtherUser';
 import Avatar from '../Avatar';
+import GroupedAvatar from '../GroupedAvatar';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
 
 interface ProfileDrawerProps {
@@ -91,7 +92,11 @@ export default function ProfileDrawer({
                       <div className='relative mt-6 flex-1 px-4 sm:px-6'>
                         <div className='flex flex-col items-center'>
                           <div className='mb-2'>
-                            <Avatar user={otherUser} />
+                            {data.isGroup ? (
+                              <GroupedAvatar users={data.users} />
+                            ) : (
+                              <Avatar user={otherUser} />
+                            )}
                           </div>
                           <div>{title}</div>
                           <div className='text-sm text-gray-500 '>{status}</div>
@@ -110,6 +115,18 @@ export default function ProfileDrawer({
                           </div>
                           <div className='w-full pb-5 pt-5 sm:px-0 sm:pt-0'>
                             <dl className='space-y-8 px-4 sm:space-y-6 sm:px-6'>
+                              {data.isGroup && (
+                                <div>
+                                  <dt className='text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0'>
+                                    Chat Members
+                                  </dt>
+                                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2'>
+                                    {data.users
+                                      .map((user) => user.name)
+                                      .join(', ')}
+                                  </dd>
+                                </div>
+                              )}
                               {!data.isGroup && (
                                 <div>
                                   <dt className='text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0'>

@@ -20,7 +20,7 @@ export default function GroupedAvatar({ users = [] }: GroupedAvatarProps) {
       {slicedUsers.map((user, index) => (
         <div
           key={user.id}
-          className={`absolute inline-block rounded-full overflow-hidden h-[30px] w-[30px] border border-white  ${
+          className={`absolute inline-block rounded-full overflow-hidden h-[30px] w-[30px] border border-white ${
             avatarPositioning[index as keyof typeof avatarPositioning]
           }`}
         >
