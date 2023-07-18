@@ -39,20 +39,31 @@ export default function Body({ initialMessages }: BodyProps) {
         if (find(current, { id: message.id })) {
           return current;
         }
-
         return [...current, message];
       });
-
       bottomRef?.current?.scrollIntoView();
+    };
+
+    const updateSeenMessageHandler = (newMessage: FullMessageType) => {
+      setMessages((current) =>
+        current.map((currentMessage) => {
+          if (currentMessage.id === newMessage.id) {
+            return newMessage;
+          }
+          return currentMessage;
+        })
+      );
     };
 
     // bind pusher client handler
     pusherClient.bind('messages:new', messageHandler);
+    pusherClient.bind('message:update', updateSeenMessageHandler);
 
     // unbind + unmount to prevent overflow
     return () => {
       pusherClient.unsubscribe(conversationId);
       pusherClient.unbind('messages:new', messageHandler);
+      pusherClient.unbind('message:update', updateSeenMessageHandler);
     };
   }, [conversationId]);
 
