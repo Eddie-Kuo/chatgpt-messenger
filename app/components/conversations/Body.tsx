@@ -1,6 +1,7 @@
 'use client';
 
 import axios from 'axios';
+import { find } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import useConversation from '../../hooks/useConversation';
 import { pusherClient } from '../../lib/pusher';
@@ -29,13 +30,29 @@ export default function Body({ initialMessages }: BodyProps) {
     // auto scroll to latest message
     bottomRef?.current?.scrollIntoView();
 
+    const messageHandler = (message: FullMessageType) => {
+      // alert other participants once the new messages have been seen
+      axios.post(`/api/conversations/${conversationId}/seen`);
+
+      // compare current list of messages with the id of the new incoming message
+      setMessages((current) => {
+        if (find(current, { id: message.id })) {
+          return current;
+        }
+
+        return [...current, message];
+      });
+
+      bottomRef?.current?.scrollIntoView();
+    };
+
     // bind pusher client handler
-    pusherClient.bind('messages:new', () => {});
+    pusherClient.bind('messages:new', messageHandler);
 
     // unbind + unmount to prevent overflow
     return () => {
       pusherClient.unsubscribe(conversationId);
-      pusherClient.unbind('messages:new');
+      pusherClient.unbind('messages:new', messageHandler);
     };
   }, [conversationId]);
 
