@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import useConversation from '../../hooks/useConversation';
+import { pusherClient } from '../../lib/pusher';
 import { FullMessageType } from '../../types';
 import MessageBox from './MessageBox';
 
@@ -19,6 +20,23 @@ export default function Body({ initialMessages }: BodyProps) {
   // post route to mark conversation as seen when user clicks into conversation
   useEffect(() => {
     axios.post(`/api/conversations/${conversationId}/seen`);
+  }, [conversationId]);
+
+  // subscribe to pusher
+  useEffect(() => {
+    pusherClient.subscribe(conversationId);
+
+    // auto scroll to latest message
+    bottomRef?.current?.scrollIntoView();
+
+    // bind pusher client handler
+    pusherClient.bind('messages:new', () => {});
+
+    // unbind + unmount to prevent overflow
+    return () => {
+      pusherClient.unsubscribe(conversationId);
+      pusherClient.unbind('messages:new');
+    };
   }, [conversationId]);
 
   return (
