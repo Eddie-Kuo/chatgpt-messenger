@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { HiChevronLeft } from 'react-icons/hi';
 import { HiEllipsisHorizontal } from 'react-icons/hi2';
+import useActiveList from '../../hooks/useActiveList';
 import useOtherUser from '../../hooks/useOtherUser';
 import Avatar from '../Avatar';
 import GroupedAvatar from '../GroupedAvatar';
@@ -19,6 +20,8 @@ interface HeaderProps {
 export default function Header({ conversation }: HeaderProps) {
   const otherUser = useOtherUser(conversation);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const { members } = useActiveList();
+  const isActive = members.indexOf(otherUser?.email!) !== -1;
 
   const statusText = useMemo(() => {
     // if is group convo, return number of members. Otherwise display online status
@@ -26,8 +29,8 @@ export default function Header({ conversation }: HeaderProps) {
       return `${conversation.users.length} members`;
     }
 
-    return 'Active'; // hardcoded for now
-  }, [conversation]);
+    return isActive ? 'Active' : 'Offline';
+  }, [conversation, isActive]);
 
   return (
     <>
