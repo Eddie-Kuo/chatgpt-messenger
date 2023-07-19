@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   const users = await getUsers();
 
   return (
-    // @ts-expect-error Server Component
+    // @ts-ignore
     <SideBar>
       <div className='h-full'>
         <UserList items={users} />
