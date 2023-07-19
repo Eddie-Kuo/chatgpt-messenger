@@ -5,6 +5,7 @@ import { Conversation, User } from '@prisma/client';
 import { format } from 'date-fns';
 import { Fragment, useMemo, useState } from 'react';
 import { IoClose, IoTrash } from 'react-icons/io5';
+import useActiveList from '../../hooks/useActiveList';
 import useOtherUser from '../../hooks/useOtherUser';
 import Avatar from '../Avatar';
 import GroupedAvatar from '../GroupedAvatar';
@@ -25,6 +26,8 @@ export default function ProfileDrawer({
 }: ProfileDrawerProps) {
   const otherUser = useOtherUser(data);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const { members } = useActiveList();
+  const isActive = members.indexOf(otherUser?.email!) !== -1;
 
   const joinedData = useMemo(() => {
     return format(new Date(otherUser.createdAt), 'PP');
@@ -39,8 +42,8 @@ export default function ProfileDrawer({
       return `${data.users.length} members`;
     }
 
-    return 'Active';
-  }, [data]);
+    return isActive ? 'Active' : 'Offline';
+  }, [data, isActive]);
 
   return (
     <>
