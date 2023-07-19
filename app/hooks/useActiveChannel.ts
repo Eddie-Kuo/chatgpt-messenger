@@ -9,6 +9,7 @@ const useActiveChannel = () => {
 
   useEffect(() => {
     let channel = activeChannel;
+
     if (!channel) {
       channel = pusherClient.subscribe('presence-messenger');
       setActiveChannel(channel);
