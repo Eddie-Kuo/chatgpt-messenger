@@ -50,11 +50,25 @@ export default function ConversationsList({
       });
     };
 
+    const updateMessageHandler = (conversation: FullConversationType) => {
+      setItems((current) =>
+        current.map((currentConversation) => {
+          if (currentConversation.id === conversation.id) {
+            return { ...currentConversation, messages: conversation.messages };
+          }
+
+          return currentConversation;
+        })
+      );
+    };
+
     pusherClient.bind('conversation:new', newConversationHandler);
+    pusherClient.bind('conversation:update', updateMessageHandler);
 
     return () => {
       pusherClient.unsubscribe(pusherKey);
       pusherClient.unbind('conversation:new', newConversationHandler);
+      pusherClient.unbind('conversation:update', updateMessageHandler);
     };
   }, [pusherKey]);
 
