@@ -1,8 +1,10 @@
 'use client';
 
 import axios from 'axios';
+import { find } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import useConversation from '../../hooks/useConversation';
+import { pusherClient } from '../../lib/pusher';
 import { FullMessageType } from '../../types';
 import MessageBox from './MessageBox';
 
@@ -19,6 +21,50 @@ export default function Body({ initialMessages }: BodyProps) {
   // post route to mark conversation as seen when user clicks into conversation
   useEffect(() => {
     axios.post(`/api/conversations/${conversationId}/seen`);
+  }, [conversationId]);
+
+  // subscribe to pusher
+  useEffect(() => {
+    pusherClient.subscribe(conversationId);
+
+    // auto scroll to latest message
+    bottomRef?.current?.scrollIntoView();
+
+    const messageHandler = (message: FullMessageType) => {
+      // alert other participants once the new messages have been seen
+      axios.post(`/api/conversations/${conversationId}/seen`);
+
+      // compare current list of messages with the id of the new incoming message
+      setMessages((current) => {
+        if (find(current, { id: message.id })) {
+          return current;
+        }
+        return [...current, message];
+      });
+      bottomRef?.current?.scrollIntoView();
+    };
+
+    const updateSeenMessageHandler = (newMessage: FullMessageType) => {
+      setMessages((current) =>
+        current.map((currentMessage) => {
+          if (currentMessage.id === newMessage.id) {
+            return newMessage;
+          }
+          return currentMessage;
+        })
+      );
+    };
+
+    // bind pusher client handler
+    pusherClient.bind('messages:new', messageHandler);
+    pusherClient.bind('message:update', updateSeenMessageHandler);
+
+    // unbind + unmount to prevent overflow
+    return () => {
+      pusherClient.unsubscribe(conversationId);
+      pusherClient.unbind('messages:new', messageHandler);
+      pusherClient.unbind('message:update', updateSeenMessageHandler);
+    };
   }, [conversationId]);
 
   return (
