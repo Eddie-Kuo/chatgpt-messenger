@@ -62,15 +62,27 @@ export default function ConversationsList({
       );
     };
 
+    const deleteMessageHandler = (conversation: FullConversationType) => {
+      setItems((current) => {
+        return [...current.filter((convo) => convo.id !== conversation.id)];
+      });
+
+      if (conversationId === conversation.id) {
+        router.push('/conversations');
+      }
+    };
+
     pusherClient.bind('conversation:new', newConversationHandler);
     pusherClient.bind('conversation:update', updateMessageHandler);
+    pusherClient.bind('conversation:remove', deleteMessageHandler);
 
     return () => {
       pusherClient.unsubscribe(pusherKey);
       pusherClient.unbind('conversation:new', newConversationHandler);
       pusherClient.unbind('conversation:update', updateMessageHandler);
+      pusherClient.unbind('conversation:remove', deleteMessageHandler);
     };
-  }, [pusherKey]);
+  }, [pusherKey, conversationId, router]);
 
   return (
     <>
