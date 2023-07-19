@@ -66,6 +66,10 @@ export default function ConversationsList({
       setItems((current) => {
         return [...current.filter((convo) => convo.id !== conversation.id)];
       });
+
+      if (conversationId === conversation.id) {
+        router.push('/conversations');
+      }
     };
 
     pusherClient.bind('conversation:new', newConversationHandler);
@@ -78,7 +82,7 @@ export default function ConversationsList({
       pusherClient.unbind('conversation:update', updateMessageHandler);
       pusherClient.unbind('conversation:remove', deleteMessageHandler);
     };
-  }, [pusherKey]);
+  }, [pusherKey, conversationId, router]);
 
   return (
     <>
