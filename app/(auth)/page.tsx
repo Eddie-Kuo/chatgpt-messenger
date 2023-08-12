@@ -12,8 +12,6 @@ export default function Home() {
             width={48}
             src='/images/messenger-logo.png'
           />
-          <p className='mx-2 text-2xl font-bold'>+</p>
-          <Image alt='logo' height={48} width={48} src='/images/openai.png' />
         </div>
         <h2 className='mt-6 text-center text-3xl font-bold tracking-light text-gray-900'>
           Sign into your account{' '}
