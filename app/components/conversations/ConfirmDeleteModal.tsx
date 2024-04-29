@@ -15,10 +15,10 @@ interface ConfirmDeleteModelProps {
   onClose: () => void;
 }
 
-export default function ConfirmDeleteModal({
-  isOpen,
-  onClose,
-}: ConfirmDeleteModelProps) {
+const ConfirmDeleteModelProps = ({
+                  isOpen,
+                  onClose,
+                }: ConfirmDeleteModelProps) => {
   const router = useRouter();
   const { conversationId } = useConversation();
   const [isLoading, setIsLoading] = useState(false);
@@ -69,3 +69,4 @@ export default function ConfirmDeleteModal({
     </Modal>
   );
 }
+export default ConfirmDeleteModelProps;

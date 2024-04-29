@@ -9,7 +9,7 @@ interface ImageModalProps {
   isOpen?: boolean;
 }
 
-export default function ImageModal({ src, onClose, isOpen }: ImageModalProps) {
+const ImageModal =  ({src, onClose, isOpen}: ImageModalProps) => {
   if (!src) {
     return null;
   }
@@ -22,3 +22,5 @@ export default function ImageModal({ src, onClose, isOpen }: ImageModalProps) {
     </Modal>
   );
 }
+
+export default ImageModal;

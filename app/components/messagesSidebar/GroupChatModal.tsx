@@ -17,11 +17,11 @@ interface GroupChatModalProps {
   users: User[];
 }
 
-export default function GroupChatModal({
+const GroupChatModal = ({
   isOpen,
   onClose,
   users,
-}: GroupChatModalProps) {
+}: GroupChatModalProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -110,3 +110,5 @@ export default function GroupChatModal({
     </Modal>
   );
 }
+
+export default GroupChatModal;

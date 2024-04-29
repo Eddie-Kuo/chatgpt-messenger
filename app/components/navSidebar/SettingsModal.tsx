@@ -1,5 +1,3 @@
-'use client';
-
 import { User } from '@prisma/client';
 import axios from 'axios';
 import { CldUploadButton } from 'next-cloudinary';
